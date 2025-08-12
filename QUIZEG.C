@@ -94,9 +94,32 @@ void homePage(){
 
 void CreateAc(){
 
+	char name[20], email, password;
+	int age;
 	clrscr();
 	
-	printf("\t\t\t\t> > Create Account < < \n");
+	printf("\t\t\t\t> > Create Account < < \n\n\n\n\n\n");
+	
+	printf("Name -- ");
+	scanf("%s", &name);
+	printf("\n");
+	
+	printf("Password -- ");
+	scanf("%s", &password);
+
+	
+	printf("Email -- ");
+	if(@gmail || .com){
+	   scanf("%s", &email);
+	   printf("\n");
+	}else{
+	   printf("Invalid gamil please enter right gmail");
+	}
+	
+	printf("Age -- ");
+	scanf("%d", &age);
+	printf("\n\n");
+	
 	
 	getch();
 
