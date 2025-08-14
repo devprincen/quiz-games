@@ -94,7 +94,7 @@ void homePage(){
 
 void CreateAc(){
 
-	char name[20], email, password;
+	char name[20], email[100], password;
 	int age;
 	clrscr();
 	
@@ -106,19 +106,25 @@ void CreateAc(){
 	
 	printf("Password -- ");
 	scanf("%s", &password);
+	printf("\n");
 
 	
-	printf("Email -- ");
-	if(@gmail || .com){
-	   scanf("%s", &email);
-	   printf("\n");
+	do{
+	    printf("Email -- ");
+ 	    scanf(" %s", &email);    
+	if(strstr(email, "@email") && strstr(email, ".com")){
+		break;
 	}else{
-	   printf("Invalid gamil please enter right gmail");
-	}
+	   printf("\n\t\tInvalid email please enter right email\n");
+	  }
+	} while(1);
+	     printf("\n");
 	
 	printf("Age -- ");
 	scanf("%d", &age);
 	printf("\n\n");
+	
+	printf("Your account has been created successfully, please login.");
 	
 	
 	getch();
