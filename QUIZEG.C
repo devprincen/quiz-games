@@ -15,6 +15,7 @@ void Instructions();
 int main(){
 	Wellcome();
 	homePage();
+        CreateAc();
 
 	return 0;
 }
@@ -93,50 +94,97 @@ void homePage(){
 }
 
 void CreateAc(){
-
-	char name[20], email[100], password;
-	int age;
+        FILE *file;
+	char name[20], email[100], password[50], lg;
+	int age;	
 	clrscr();
 	
-	printf("\t\t\t\t> > Create Account < < \n\n\n\n\n\n");
+	file = fopen("data.csv", "w");
+	
+	printf("\t\t\t\t> > Create Account < < \n");
+	
+	if(file == NULL){ 
+	   printf("\t\t\t\t File is not find\n\n\n\n\n");	
+	   return;
+	}
 	
 	printf("Name -- ");
-	scanf("%s", &name);
+	scanf("%s", name);
+	fprintf(file, "Name: %s\n", name);
 	printf("\n");
 	
 	printf("Password -- ");
-	scanf("%s", &password);
+	scanf("%s", password);
+	fprintf(file, "Password: %s\n", password);
 	printf("\n");
 
 	
 	do{
 	    printf("Email -- ");
- 	    scanf(" %s", &email);    
-	if(strstr(email, "@email") && strstr(email, ".com")){
+ 	    scanf(" %s", email);    
+	if(strchr(email, '@') && strstr(email, ".com")){
 		break;
 	}else{
 	   printf("\n\t\tInvalid email please enter right email\n");
 	  }
 	} while(1);
 	     printf("\n");
+          	fprintf(file, "Email: %s\n", email);
 	
 	printf("Age -- ");
 	scanf("%d", &age);
+	fprintf(file, "Age: %d\n", age);
 	printf("\n\n");
 	
-	printf("Your account has been created successfully, please login.");
+	fclose(file);
 	
+	printf("Your account has been created successfully, please login.\n\n");
+	printf("If you want to login, click Y/y\n\n");
+	printf("If you want exit the program click no\n\n");
+	scanf(" %c", &lg);
+	if(lg == 'Y' || lg == 'y'){
+	     LoginAc();
+	} else{
+	     exit(0);
+	}
 	
 	getch();
 
 }
 
 void LoginAc(){
-
+	FILE* file;
+	char name[20], password[50];
+	char storedName[20], storedPass[20];
 	clrscr();
 	
+	file = fopen("data.csv", "r");
+		
 	printf("\t\t\t\t> > Login Account < < \n");
 	
+	if(file == NULL){ 
+	   printf("\t\t\t\t File is not find\n\n\n\n\n");	
+	   return;
+	}
+	
+	printf("Enter Name: -- ");
+	scanf("%s", name);
+	printf("\n");
+	
+	printf("Enter Password: -- \n");
+	scanf("%s", password);
+	printf("\n");
+	
+	fscanf(file, "Name: %s\n", storedName);
+	fscanf(file, "Password: %s\n", storedPass);
+	
+	if(strcmp(name, storedName) == 0 && strcmp(password, storedPass) == 0){
+	   printf("\t\t\t\t Name and Password is match\n");
+	}else{
+	   printf("\t\t\t\t Name and Password is not match please try again\n");
+	}
+	
+	fclose(file);
 	getch();
 
 }
